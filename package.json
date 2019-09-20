@@ -1,0 +1,22 @@
+{
+  "name": "flatserver",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server",
+    "rebuild": "electron-rebuild -f -w sqlite3"
+  },
+  "dependencies": {
+    "express": "~4.16.1",
+    "net-ping": "^1.2.3",
+    "node-arp": "^1.0.6",
+    "node-gyp": "^5.0.3",
+    "node-ping": "^0.1.0",
+    "ping": "^0.2.2",
+    "pug": "^2.0.4",
+    "sqlite3": "^4.1.0"
+  },
+  "devDependencies": {
+    "electron-rebuild": "^1.8.6"
+  }
+}
