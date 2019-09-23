@@ -15,6 +15,8 @@ for(var currNode = 0; currNode < nodes_count; currNode++) {
     nodes[currNode] = new Node(target_net + String(currNode + 1));
 }
 
+console.log(`Nodes length: ${nodes.length}`);
+
 const poller = new Poller(nodes);
 poller.start();
 setInterval(() => {poller.start();}, refresh_interval * 1000);
