@@ -1,8 +1,8 @@
-var dns = require('dns');
-var arp = require('node-arp');
-var ping = require ("net-ping");
-// var ping = require('ping');
-var ping_options = {
+const dns = require('dns');
+const arp = require('node-arp');
+const ping = require ("net-ping");
+
+const ping_options = {
     timeout: 1000
 }
 var session = ping.createSession(ping_options);
@@ -21,9 +21,9 @@ class Poller {
         this._offline_count = 0;
         this._online_count = 0;
             
-        for(let cPoller = 0; cPoller < this._nodes.length; cPoller++) {
-            const node = this._nodes[cPoller];
-            session.pingHost(node.ip_addr,  (error, target, sent, rcvd) => {
+        for(var currNode = 0; currNode < this._nodes.length; currNode++) {
+            const node = this._nodes[currNode];
+            session.pingHost(node.ip_addr, (error, target, sent, rcvd) => {
 
                 if (error) {
                     node.is_online = false;
