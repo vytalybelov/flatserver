@@ -1,23 +1,24 @@
+const config = require('./config');
 const express = require('express');
 const app = express();
-app.set("view engine", "pug");
 app.use(express.static(__dirname + '/public'));
 
-var refresh_interval = 20; // in seconds
-var Node = require('./node');
-var Poller = require('./poller');
-const NODES_COUNT = 64;
-var nodes = new Array(NODES_COUNT);
-var target_net = '192.168.8.'
+const refresh_interval = config.refresh_interval; // in seconds
+const Node = require('./node');
+const Poller = require('./poller');
+const nodes_count = config.nodes_count;
+const nodes = new Array(nodes_count);
+const target_net = config.target_net;
 
-for(var cNode = 0; cNode < NODES_COUNT; cNode++) {
+for(var cNode = 0; cNode < nodes_count; cNode++) {
     nodes[cNode] = new Node(target_net + String(cNode+1));
 }
 
-var poller = new Poller(nodes);
+const poller = new Poller(nodes);
 poller.start();
 setInterval(() => {poller.start();}, refresh_interval * 1000);
 
+app.set("view engine", "pug");
 const pug = require('pug');
 const compiledPug = pug.compileFile('./views/nodes.pug');
 
